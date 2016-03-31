@@ -21,4 +21,10 @@ Install exiftool into script folder or in system path.
 Open thetacorrector.py, change hard-coded nona_path var
 
 ## Usage 
+
+Set photo position using JOSM with his modules.
+
+If you has manualy moved photos in JOSM:
+regenerate_direction.py "E:/photos/2016-05-09_velo_center_theta"
+
 thetacorrector.py "E:/photos/2016-05-09_velo_center_theta"
