@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python
+#!/usr/bin/python
 
 import sys
 import os
@@ -128,7 +128,7 @@ def theta_horizont_auto_correction(filepath):
     with exiftool.ExifTool() as et:
         #params={}
         #params ['-tagsFromFile "%s"' % filepath+ ' -XMP:All= -ThumbnailImage= -m %s' % new_filepath
-        s_params='-q -tagsFromFile "%s"' % filepath+' -overwrite_original -XMP:PosePitchDegrees=0 -XMP:PoseRollDegrees=0 -ThumbnailImage= -m %s' % new_filepath
+        s_params='-q -tagsFromFile "%s"' % filepath+' -overwrite_original -XMP:PosePitchDegrees=0 -XMP:PoseRollDegrees=0 -ThumbnailImage= -m "%s"' % new_filepath
         subprocess.call('exiftool '+s_params)
         
         #print s_params
@@ -172,8 +172,4 @@ if __name__ == '__main__':
         progress(index, total, status='Add information to '+str(total) + ' photos')
         theta_horizont_auto_correction(filepath)
         
-    import time
-    time.sleep(5)
     
-
-    #raw_input()
