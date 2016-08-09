@@ -63,7 +63,7 @@ if __name__ == '__main__':
             index=total
 			
         progress(index, total, status='Add information to '+str(total) + ' photos')
-        command='exiftool -overwrite_original -ProjectionType="equirectangular" -UsePanoramaViewer="True"  -"GPSImgDirection<$exif:GPSImgDirection" -"PoseHeadingDegrees<$exif:GPSImgDirection" -"CroppedAreaImageWidthPixels<$ImageWidth" -"CroppedAreaImageHeightPixels<$ImageHeight" -"FullPanoWidthPixels<$ImageWidth" -"FullPanoHeightPixels<$ImageHeight" -CroppedAreaLeftPixels="0" -CroppedAreaTopPixels="0"  ' + filepath
+        command='exiftool -overwrite_original  -P -ProjectionType="equirectangular" -UsePanoramaViewer="True"  -"GPSImgDirection<$exif:GPSImgDirection" -"PoseHeadingDegrees<$exif:GPSImgDirection" -"CroppedAreaImageWidthPixels<$ImageWidth" -"CroppedAreaImageHeightPixels<$ImageHeight" -"FullPanoWidthPixels<$ImageWidth" -"FullPanoHeightPixels<$ImageHeight" -CroppedAreaLeftPixels="0" -CroppedAreaTopPixels="0"  "' + filepath + '"'
         #print command
         subprocess.call(command)
     import time
