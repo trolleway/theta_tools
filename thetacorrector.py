@@ -128,7 +128,7 @@ def theta_horizont_auto_correction(filepath):
     with exiftool.ExifTool() as et:
         #params={}
         #params ['-tagsFromFile "%s"' % filepath+ ' -XMP:All= -ThumbnailImage= -m %s' % new_filepath
-        s_params='-q -tagsFromFile "%s"' % filepath+' -overwrite_original -XMP:PosePitchDegrees=0 -XMP:PoseRollDegrees=0 -ThumbnailImage= -m "%s"' % new_filepath
+        s_params='-q -tagsFromFile "%s"' % filepath+' -overwrite_original -XMP:PosePitchDegrees=0 -XMP:PoseRollDegrees=0 -quiet -ThumbnailImage= -m "%s"' % new_filepath
         subprocess.call('exiftool '+s_params)
         
         #print s_params
