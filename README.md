@@ -12,9 +12,9 @@ bulk regenerate GPS Direction tag. Needed after manual coordinates correction in
 
 Windows. Should be work in Ubuntu, but not tested yet. Why you use Ubuntu for work with photos?
 ## Install
-
-git clone
-
+```
+git clone https://github.com/trolleway/theta_tools.git
+```
 Install Hugin
 Install exiftool into script folder or in system path.
 
@@ -24,7 +24,19 @@ Open thetacorrector.py, change hard-coded nona_path var
 
 Set photo position using JOSM with his modules.
 
-If you has manualy moved photos in JOSM:
+
+```
+#If you has manualy moved photos in JOSM:
 regenerate_direction.py "E:/photos/2016-05-09_velo_center_theta"
 
 thetacorrector.py "E:/photos/2016-05-09_velo_center_theta"
+```
+
+## Create Send To entries in Windows
+Assuming Windows 7, If you open a folder and type "shell:sendto" in the address bar then hit enter you'll be taken to the context menu. You can add a .cmd file with the following in it.
+
+```
+@echo off
+cls
+python C:\Your\File\uploadscript.py %1
+```
