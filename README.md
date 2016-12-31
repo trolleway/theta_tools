@@ -22,19 +22,18 @@ Open thetacorrector.py, change hard-coded nona_path var
 
 ## Usage 
 
-Set photo position using JOSM with his modules.
+1. Refrence photo coordinates to GPX tracks using JOSM with his modules or GeoSetter with latest version ExifTool. I prefer JOSM, it more quickly interface.
 
-
+2. 
 ```
-#If you has manualy moved photos in JOSM:
 regenerate_direction.py "E:/photos/2016-05-09_velo_center_theta"
 
 thetacorrector.py "E:/photos/2016-05-09_velo_center_theta"
 ```
 
+
 ## Create Send To entries in Windows
 Assuming Windows 7, If you open a folder and type "shell:sendto" in the address bar then hit enter you'll be taken to the context menu. You can add a .cmd file with the following in it.
-
 ```
 @echo off
 cls
