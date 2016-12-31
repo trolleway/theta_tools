@@ -16,9 +16,10 @@ After
 ## regenerate_direction.py 
 bulk regenerate GPS Direction tag. Needed after manual coordinates correction in JOSM for accept by Google Street View service. Requires exiftool program.
 
-## Platform
+### Platform
 
 Windows. Should be work in Ubuntu, but not tested yet. Why you use Ubuntu for work with photos?
+
 ## Install
 ```
 git clone https://github.com/trolleway/theta_tools.git
@@ -39,7 +40,7 @@ thetacorrector.py "E:/photos/2016-05-09_velo_center_theta"
 ```
 
 
-## Create Send To entries in Windows
+### Create Send To entries in Windows
 Assuming Windows 7, If you open a folder and type "shell:sendto" in the address bar then hit enter you'll be taken to the context menu. You can add a .cmd file with the following in it.
 ```
 @echo off
