@@ -3,7 +3,15 @@ my ricoh theta tools for mapillary and google street view
 
 
 ## thetacorrector.py
-bulk nadir-zenith correction using nona
+Bulk horizont correction (nadir-zenith) using nona
+
+![alt tag](https://c1.staticflickr.com/1/388/31850859142_5d50c27092.jpg)
+
+Before
+
+![alt tag](https://c1.staticflickr.com/1/671/31850880602_91e5fc33a9.jpg)
+
+After
 
 ## regenerate_direction.py 
 bulk regenerate GPS Direction tag. Needed after manual coordinates correction in JOSM for accept by Google Street View service. Requires exiftool program.
@@ -15,10 +23,9 @@ Windows. Should be work in Ubuntu, but not tested yet. Why you use Ubuntu for wo
 ```
 git clone https://github.com/trolleway/theta_tools.git
 ```
-Install Hugin
-Install exiftool into script folder or in system path.
-
-Open thetacorrector.py, change hard-coded nona_path var
+1. Install Hugin
+2. Install exiftool into script folder or in system path.
+3. Open thetacorrector.py, change hard-coded nona_path var
 
 ## Usage 
 
