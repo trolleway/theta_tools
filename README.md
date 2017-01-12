@@ -26,7 +26,7 @@ git clone https://github.com/trolleway/theta_tools.git
 ```
 1. Install Hugin
 2. Install exiftool into script folder or in system path.
-3. Open thetacorrector.py, change hard-coded nona_path var
+3. Open thetacorrector.py, change nona_path variable. Set here path to nona.exe from Hugin folder/
 
 ## Usage 
 
