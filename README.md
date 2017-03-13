@@ -45,5 +45,5 @@ Assuming Windows 7, If you open a folder and type "shell:sendto" in the address 
 ```
 @echo off
 cls
-python C:\Your\File\uploadscript.py %1
+python C:\theta_tools\thetacorrector.py %1
 ```
