@@ -7,14 +7,6 @@ import subprocess
 
 
 
-
-'''
-
-
-'''
-
-
-
 def get_args():
     import argparse
     p = argparse.ArgumentParser(description='Geotag one or more photos with location and orientation from GPX file.')
@@ -31,13 +23,6 @@ def progress(count, total, status=''):
 
     sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status))
     sys.stdout.flush()  # As suggested by Rom Ruben (see: http://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console/27871113#comment50529068_27871113)
-
-    
-
-
-
-    
-
 
 
 if __name__ == '__main__':
@@ -63,9 +48,25 @@ if __name__ == '__main__':
             index=total
 			
         progress(index, total, status='Add information to '+str(total) + ' photos')
-        command='exiftool -overwrite_original  -P -ProjectionType="equirectangular" -UsePanoramaViewer="True"  -"GPSImgDirection<$exif:GPSImgDirection" -"PoseHeadingDegrees<$exif:GPSImgDirection" -"CroppedAreaImageWidthPixels<$ImageWidth" -"CroppedAreaImageHeightPixels<$ImageHeight" -"FullPanoWidthPixels<$ImageWidth" -"FullPanoHeightPixels<$ImageHeight" -CroppedAreaLeftPixels="0" -CroppedAreaTopPixels="0"  "' + filepath + '"'
+        #command='exiftool -overwrite_original  -P -ProjectionType="equirectangular" -UsePanoramaViewer="True"  -"GPSImgDirection<$exif:GPSImgDirection" -"PoseHeadingDegrees<$exif:GPSImgDirection" -"CroppedAreaImageWidthPixels<$ImageWidth" -"CroppedAreaImageHeightPixels<$ImageHeight" -"FullPanoWidthPixels<$ImageWidth" -"FullPanoHeightPixels<$ImageHeight" -CroppedAreaLeftPixels="0" -CroppedAreaTopPixels="0"  "' + filepath + '"'
+        cmd=[]
+        cmd.append('exiftool')
+        cmd.append('-overwrite_original')
+        cmd.append('-P')
+        cmd.append('-ProjectionType=equirectangular')
+        cmd.append('-UsePanoramaViewer="True"')
+        cmd.append('-"GPSImgDirection<$exif:GPSImgDirection"')
+        cmd.append('-"PoseHeadingDegrees<$exif:GPSImgDirection"')
+        cmd.append('-"CroppedAreaImageWidthPixels<$ImageWidth"')
+        cmd.append('-"CroppedAreaImageHeightPixels<$ImageHeight"')
+        cmd.append('-"FullPanoWidthPixels<$ImageWidth"')
+        cmd.append('-"FullPanoHeightPixels<$ImageHeight"')
+        cmd.append('-"CroppedAreaImageWidthPixels<$ImageWidth"')
+        cmd.append('-CroppedAreaLeftPixels=0')
+        cmd.append('-CroppedAreaTopPixels=0')
+        cmd.append(filepath)
         #print command
-        subprocess.call(command)
+        subprocess.run(cmd)
     import time
     time.sleep(5)
     
