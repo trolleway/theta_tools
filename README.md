@@ -34,16 +34,11 @@ git clone https://github.com/trolleway/theta_tools.git
 
 2. 
 ```
-regenerate_direction.py "E:/photos/2016-05-09_velo_center_theta"
+docker build --tag theta_corrector:latest .
+docker run --rm -v "${PWD}/photos:/opt/photo_tools/photos"  -it theta_corrector:latest
 
-thetacorrector.py "E:/photos/2016-05-09_velo_center_theta"
+./regenerate_direction.py photos
+
+./thetacorrector.py photos
 ```
 
-
-### Create Send To entries in Windows
-Assuming Windows 7, If you open a folder and type "shell:sendto" in the address bar then hit enter you'll be taken to the context menu. You can add a .cmd file with the following in it.
-```
-@echo off
-cls
-python C:\theta_tools\thetacorrector.py %1
-```

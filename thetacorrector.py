@@ -1,22 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys
 import os
 import subprocess
-import exiftool
 
 
+from exiftool import ExifToolHelper
 
-from PIL import Image
-from PIL.ExifTags import TAGS
-
-
-
-#from transliterate import translit, get_available_language_codes
-
-'''
-
-'''
 
 def get_exif(fn):
     ret = {}
@@ -26,12 +16,13 @@ def get_exif(fn):
         decoded = TAGS.get(tag, tag)
         ret[decoded] = value
     return ret
-    
+'''    
 def get_exif3(fn):
     #img = PIL.Image.open(fn)
 
     for (k,v) in Image.open(fn)._getexif().iteritems():
-        print '%s = %s' % (TAGS.get(k), v)
+        print('{k} = {v}'.format(k=TAGS.get(k),v=v) )
+'''
 
 
 def get_args():
@@ -84,7 +75,7 @@ def print_pto(filepath,new_filepath,pitch,roll):
     pto=open('temp.pto', 'w')
     line='i w5376 h2688 f4 v360 r'+str(roll)+' p'+str(pitch)+' y0 n"'+filepath+'"'+"\n"
     pto.write(line)    
-    line='p w5376 h2688 f2 v360 r0 p0 y0 n"JPEG q91"'
+    line='p w5376 h2688 f2 v360 r0 p0 y0 n"JPEG q97"'
     pto.write(line)
     pto.close()
     
@@ -94,23 +85,15 @@ def theta_horizont_auto_correction(filepath):
     
     '''
     nona_path=r'''C:\Program Files\Hugin2015\bin\nona.exe'''
+    nona_path = 'nona'
     #get photo data
-    with exiftool.ExifTool() as et:
+    with ExifToolHelper() as et:
         metadata = et.get_metadata(filepath)
-        #m2=get_exif3(filepath)
-        #sprint m2
-        #quit()
-        
-        #print metadata
-        #quit()
     try:
-        pitch = metadata['XMP:PosePitchDegrees']
-        roll = metadata['XMP:PoseRollDegrees']
+        pitch = metadata[0]['XMP:PosePitchDegrees']
+        roll = metadata[0]['XMP:PoseRollDegrees']
     except:
         return False        
-
-    #print pitch
-    #print roll
 
     directory = os.path.join(os.path.dirname(filepath),'horizont_correction')
     if not os.path.exists(directory):
@@ -120,32 +103,18 @@ def theta_horizont_auto_correction(filepath):
     new_filepath=os.path.join(directory,os.path.splitext(os.path.basename(filepath))[0]+'_hor'+'.jpg')
     print_pto(filepath,new_filepath,pitch,roll)
     run_str='"'+nona_path+'" -o "'+new_filepath+'"    temp.pto'
-    #print run_str
-    #os.system(run_str)
-    subprocess.call(run_str)
+    cmd=[nona_path,'-o',new_filepath,'temp.pto']
+    print(cmd)
+    subprocess.run(cmd)
     #-tagsFromFile source_image.jpg -XMP:All= -ThumbnailImage= -m destination_image.jpg
     
-    with exiftool.ExifTool() as et:
-        #params={}
-        #params ['-tagsFromFile "%s"' % filepath+ ' -XMP:All= -ThumbnailImage= -m %s' % new_filepath
-        s_params='-q -tagsFromFile "%s"' % filepath+' -overwrite_original -XMP:PosePitchDegrees=0 -XMP:PoseRollDegrees=0 -quiet -ThumbnailImage= -m "%s"' % new_filepath
-        subprocess.call('exiftool '+s_params)
+
+    s_params=' -tagsFromFile "%s"' % filepath+' -overwrite_original -XMP:PosePitchDegrees=0 -XMP:PoseRollDegrees=0 -quiet -ThumbnailImage= -m "%s"' % new_filepath
+    cmd = 'exiftool '+s_params
+    os.system(cmd)
+
         
-        #print s_params
-        #metadata = et.get_metadata(filepath)
-    
-    #re_output=re.search('{domofoto(.+?)}',iptc_caption)
-    #if re_output:
-    #    house_id = re_output.group(1)
-    #else:
-    #    return False
 
-    #get data from web
-    #building_info = get_domofotoru_info(house_id)
-    #new_description = make_description(iptc_caption,building_info)
-    #save_exif_value2(filepath,'Exif.Description',new_description)
-
-    
 
 
 if __name__ == '__main__':
@@ -157,7 +126,7 @@ if __name__ == '__main__':
 
         file_list = []
         for root, sub_folders, files in os.walk(args.path):
-            file_list += [os.path.join(root, filename) for filename in files if filename.lower().endswith(".jpg")]
+            file_list += [os.path.join(root, filename) for filename in files if filename.lower().endswith(".jpg") and 'horizont_correction' not in os.path.join(root, filename)]
 
 
 
